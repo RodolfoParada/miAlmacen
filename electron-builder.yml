@@ -1,0 +1,38 @@
+appId: com.almacen.pos
+productName: ScanPOS
+directories:
+  buildResources: build
+files:
+  - '!**/.vscode/*'
+  - '!src/*'
+  - '!scripts/*'
+  - '!electron.vite.config.{js,ts,mjs,cjs}'
+  - '!{.eslintignore,.eslintrc.cjs,.prettierignore,.prettierrc.yaml,dev-app-update.yml,CHANGELOG.md,README.md,PLAN.md,CLAUDE.md,SPEC.md}'
+  - '!{.env,.env.*,.npmrc,pnpm-lock.yaml}'
+  - '!{tsconfig.json,tsconfig.node.json,tsconfig.web.json}'
+  - '!{.smoke.cjs,.ipcsmoke.cjs,.uismoke.cjs,.invsmoke.cjs,.ventasmoke.cjs,.scansmoke.cjs,.etqsmoke.cjs,.histsmoke.cjs}'
+win:
+  executableName: ScanPOS
+  target:
+    - nsis
+nsis:
+  artifactName: ${name}-${version}-setup.${ext}
+  shortcutName: ${productName}
+  uninstallDisplayName: ${productName}
+  createDesktopShortcut: always
+mac:
+  target:
+    - dmg
+  category: public.app-category.business
+  entitlementsInherit: build/entitlements.mac.plist
+  extendInfo:
+    - NSCameraUsageDescription: Application requests access to the device's camera.
+    - NSMicrophoneUsageDescription: Application requests access to the device's microphone.
+  notarize: false
+linux:
+  target:
+    - AppImage
+    - deb
+  maintainer: miAlmacen
+  category: Office
+  syncDesktopName: true
